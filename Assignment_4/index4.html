@@ -1,0 +1,125 @@
+<!-- Task Statement
+
+Create a div with class='text-here' id='text-container' containing the text "This is some example text" inside it.
+
+Create a textbox with id="colorbox" to change the color of the above text according to the value entered in the textbox on a button click.
+The text input should have a button with id="colorchange" that changes the text color according to the input color.
+
+Create a range input type with id="fontsize" for changing the size of the text. The default should be 55. The sizes should vary from 10 to 100.
+When the user uses the slider and its value changes then the font size of the text inside the div with id='text container' should change according to the input value of the slider.
+
+Create 3 buttons with ids "underline", "italic", and "bold" to change the text to bold, italics, underline, and vice versa.  
+The buttons should have a class="stylebt"
+
+Make a dropdown list with id="list" containing the primary 5 font families, that is, Serif, 
+Sans-Serif, Monospace, Cursive, and Fantasy and upon selection, the font of the above text should change accordingly.
+
+The font families' options should have the value of "serif", "sans-serif", "monospace", "cursive", and "fantasy" respectively.
+
+Create another button, with id="getstyle", that gives the above set CSS properties of the text in a way 
+that can be straightaway copied to make any other text appear like the one in the div text container.
+
+Display the CSS properties inside a paragraph with id="css-props" in the format
+{Property name}: {Property value}, leaving a space between every two properties. For example, you have to print the color name,
+ not the RGB value, which will be color: colourName;.
+text-decoration: underline;, font-style: italic;, 
+and font-weight: bold; CSS should be added on clicking theUnderline, Italic, and Bold buttons respectively. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .text-here {
+            font-size: 55px;
+            font-family: sans-serif;
+            color: black;
+            text-decoration: none;
+            font-style: normal;
+            font-weight: normal;
+            line-height: normal;
+            text-align: left;
+            letter-spacing: normal;
+            word-spacing: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text-here" id="text-container">This is some example text</div>
+
+    <input type="text" id="colorbox" />
+
+    <button id="colorchange">Change Colour</button>
+
+    <br /><br />
+
+    <input type="range" id="fontsize" min="10" max="100" value="55" />
+    <br /><br />
+
+    <button id="italic" class="stylebt">Italics</button>
+    <button id="underline" class="stylebt">Underline</button>
+    <button id="bold" class="stylebt">Bold</button>
+
+    <br /><br />
+
+    <select id="list">
+        <option value="serif">Serif</option>
+        <option value="sans-serif">Sans-Serif</option>
+        <option value="monospace">Monospace</option>
+        <option value="cursive">Cursive</option>
+        <option value="fantasy">Fantasy</option>
+    </select>
+
+    <br /><br />
+
+    <button id="getstyle">Get CSS</button>
+
+    <br /><br />
+    <p id="css-props"></p>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textContainer = document.getElementById('text-container');
+            const colorBox = document.getElementById('colorbox');
+            const colorChangeBtn = document.getElementById('colorchange');
+            const fontSizeRange = document.getElementById('fontsize');
+            const italicBtn = document.getElementById('italic');
+            const underlineBtn = document.getElementById('underline');
+            const boldBtn = document.getElementById('bold');
+            const fontList = document.getElementById('list');
+            const getStyleBtn = document.getElementById('getstyle');
+            const cssProps = document.getElementById('css-props');
+
+            colorChangeBtn.addEventListener('click', () => {
+                const cVal = colorBox.value;
+                textContainer.style.color = cVal;
+            });
+            fontSizeRange.addEventListener('input', () => {
+                const fsVal = fontSizeRange.value;
+                textContainer.style.fontSize = `${fsVal}px`;
+            });
+            italicBtn.addEventListener('click', () => {
+                textContainer.style.fontStyle = textContainer.style.fontStyle === 'italic' ? 'normal' : 'italic';
+            });
+            underlineBtn.addEventListener('click', () => {
+                textContainer.style.textDecoration = textContainer.style.textDecoration.includes('underline') ? 'none' : 'underline';
+            });
+            boldBtn.addEventListener('click', () => {
+                textContainer.style.fontWeight = textContainer.style.fontWeight === 'bold' ? 'normal' : 'bold';
+            });
+            fontList.addEventListener('change', () => {
+                const selectFont = fontList.value;
+                textContainer.style.fontFamily = selectFont;
+            });
+            getStyleBtn.addEventListener('click', () => {
+                const styleComp = window.getComputedStyle(textContainer);
+                const cssTxt = `color: ${colorBox.value}; font-size: ${styleComp.fontSize}; font-family: ${styleComp.fontFamily}; fontistyle: ${styleComp.fontStyle}; font-weight: ${styleComp.fontWeight}; text-decoration: ${styleComp.textDecoration}; `;
+                cssProps.textContent = cssTxt;
+            });
+        })
+    </script>
+</body>
+
+</html>

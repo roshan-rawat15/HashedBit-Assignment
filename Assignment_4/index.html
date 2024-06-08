@@ -1,0 +1,102 @@
+<!-- Task Statement - 
+
+Have you seen the different themes of the editors? There's a light theme, and there's a dark theme. We will be building today a toggle theme functionality where we will click a button to change the theme from dark to light.
+The HTML and CSS are already provided to you.
+
+The p element should have the text I am a HashedBit student, ready to become an awesome full stack developer
+
+The main div should have id="app" and class="day"
+
+The buttonshould have id="swap" and class="button_day"
+
+Write the swapTheme function to change the class of the div to night and the class of the button to button_night. Calling the swapTheme function again should change the class of the div back to day and the class of the button back to button_day
+
+Cliking the button should call the swapTheme function.
+
+
+
+Note: Do not change the CSS code -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        .day {
+            background-color: white;
+            color: black;
+        }
+
+        .night {
+            background-color: black;
+            color: blue;
+        }
+
+        .button_night {
+            background-color: darkblue;
+            color: white;
+        }
+
+        .button_day {
+            background-color: white;
+            color: black;
+        }
+
+        html,
+        body {
+            margin: 0px;
+            height: 100%;
+        }
+
+        #app {
+            height: 100%;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="day">
+        <p>
+            I am a HashedBit student, ready to become an awesome full stack
+            developer
+        </p>
+        <button onclick="swapTheme()" id="swap" class="button_day">
+            Toggle theme
+        </button>
+    </div>
+    <script>
+        // function swapTheme(){
+
+        //     const Val = document.getElementById("app").className;
+        //     const bVal = document.getElementById("swap").className;
+
+        //     if(Val === "day"){
+        //         document.getElementById("app").className = "night";
+        //         document.getElementById("swap").className = "button_night";
+        //     }
+        //     else{
+        //         document.getElementById("app").className = "day";
+        //         document.getElementById("swap").className = "button_day";
+        //     }
+
+        // }
+
+        function swapTheme() {
+            const appVal = document.getElementById("app");
+            const swapButton = document.getElementById("swap");
+
+            appVal.classList.toggle("day");
+            appVal.classList.toggle("night");
+
+            swapButton.classList.toggle("button_day");
+            swapButton.classList.toggle("button_night");
+        }
+    </script>
+</body>
+
+</html>
